@@ -9,7 +9,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.bmicalculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         applyWindowInsets()
         setupListeners()
     }
-
     private fun applyWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -29,7 +27,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
     }
-
     private fun setupListeners() {
         binding.maleCard.setOnClickListener {
             startActivity(Intent(this, MaleBmiCalculateActivity::class.java))

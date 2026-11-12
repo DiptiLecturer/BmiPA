@@ -9,22 +9,34 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.bmicalculator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        applyWindowInsets()
+        setupListeners()
+    }
 
-        binding.maleImg.setOnClickListener {
-            val intent = Intent(this@MainActivity, MaleBmiCalculateActivity::class.java)
-            startActivity(intent)
+    private fun applyWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
-        binding.femaleImg.setOnClickListener {
-            val intent = Intent(this@MainActivity, FemaleBmiCalculatorActivity::class.java)
-            startActivity(intent)
+    }
+
+    private fun setupListeners() {
+        binding.maleCard.setOnClickListener {
+            startActivity(Intent(this, MaleBmiCalculateActivity::class.java))
         }
 
+        binding.femaleCard.setOnClickListener {
+            startActivity(Intent(this, FemaleBmiCalculatorActivity::class.java))
+        }
     }
 }
